@@ -6,6 +6,9 @@ const db = require('./db/conn')
 
 app.use(express.json())
 
+const routes = require('./routes/routes')
+app.use(routes)
+
 
 
 db.sync().then(()=>{

@@ -1,9 +1,8 @@
 
-const { where } = require('sequelize')
 const Barbeiro = require('../models/barbeiro')
 
 module.exports = class BarbeiroController{
-    static async barbeiroValidation(req,res){
+    static async barbeiroCreate(req,res){
         const { nome } = req.body
 
         if(!nome){
@@ -11,7 +10,7 @@ module.exports = class BarbeiroController{
             return
         }
         //CRIAR
-        const barbeiroCreate = await Barbeiro.create({
+        const create = await Barbeiro.create({
             nome,
         })
         res.status(201).json({message: 'Barbeiro adicionado.'})
