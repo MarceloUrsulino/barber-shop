@@ -1,4 +1,3 @@
-
 const Barbeiro = require('../models/barbeiro')
 
 module.exports = class BarbeiroController{
@@ -9,12 +8,14 @@ module.exports = class BarbeiroController{
             res.status(422).json({message: 'O campo precisa ser preenchido '})
             return
         }
+
         //CRIAR
         const create = await Barbeiro.create({
             nome,
         })
         res.status(201).json({message: 'Barbeiro adicionado.'})
     }
+    
     //LISTAR
     static async barbeiroAll(req,res){
         const barbeiros = await Barbeiro.findAll()

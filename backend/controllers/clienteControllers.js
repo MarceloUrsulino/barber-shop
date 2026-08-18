@@ -9,7 +9,7 @@ module.exports = class ClienteController{
             res.status(422).json({message: 'O campo precisa ser preechido.'})
             return
         }
-
+        //VALIDAÇÃO
         const numeroregex = /^\(?[1-9]{2}\)?\s?(?:9\d|[2-9])\d{3}-?\d{4}$/
         if(!numeroregex.test(numero)){
             res.status(422).json({message: 'O número preciso ser válido.'})
@@ -23,6 +23,7 @@ module.exports = class ClienteController{
         })
         res.status(201).json({message: 'Cliente adicionado.'})
     }
+    
     //LISTAR
     static async clienteAll(req,res){
         const clientes = await Cliente.findAll()
