@@ -8,9 +8,14 @@ module.exports = class ServicoController{
             res.status(422).json({message: 'O campo precisa ser preechido.'})
             return
         }
-        
-        if(!preco){
-            res.status(422).json({message: 'O preço precisa ser válido'})
+        //VALIDANDO SE É UM NÚMERO VÁLIDO
+        if(!Number.isFinite(preco)){
+            res.status(422).json({message: 'O preço precisa ser válido.'})
+            return
+        }
+    
+        if(preco <= 0){
+            res.status(422).json({message: 'O preço precisa ser maior que zero.'})
             return
         }
 

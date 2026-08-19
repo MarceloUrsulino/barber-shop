@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const AgendamentoController = require('../controllers/agendamentoControllers')
 const BarbeiroController = require('../controllers/barbeiroControllers')
 const ClienteController = require('../controllers/clienteControllers')
 const ServicoController = require('../controllers/servicoControllers')
@@ -11,6 +12,9 @@ router.get('/cliente', ClienteController.clienteAll)
 
 router.post('/servico', ServicoController.servicoCreate)
 router.get('/servico', ServicoController.servicoAll)
+
+router.post('/agendamento', AgendamentoController.agendamentoCreate)
+router.get('/agendamento', AgendamentoController.agendamentoAll)
 
 
 module.exports = router
