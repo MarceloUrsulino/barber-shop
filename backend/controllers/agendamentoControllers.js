@@ -2,6 +2,7 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
+const { where } = require('sequelize')
 
 module.exports = class AgendamentoController{
     static async agendamentoCreate(req,res){
@@ -54,6 +55,12 @@ module.exports = class AgendamentoController{
          const servicoIdCheck = await Servico.findByPk(servicoId)
         if(!servicoIdCheck){
             res.status(422).json({message: 'Serviço não encontrado.'})
+            return
+        }
+
+        const agendamentoCheck = await Agendamento.findOne({where: {barbeiroId: barbeiroId, hora: hora, data: data}})
+        if(agendamentoCheck){
+            res.status(422).json({message: 'Agendamento indisponível, tente outra data e horário.'})
             return
         }
 
