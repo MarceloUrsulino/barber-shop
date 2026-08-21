@@ -8,7 +8,7 @@ const agendamento = db.define('Agendamento',{
         allowNull: false
     },
     data: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     clienteId: {

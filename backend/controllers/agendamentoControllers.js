@@ -28,6 +28,13 @@ module.exports = class AgendamentoController{
             res.status(422).json({message: 'A data precisa ser válida.'})
             return
         }
+        //CONVERTENDO DATA
+        const partesData = data.split("/")
+        const dia = partesData[0]
+        const mes = partesData[1]
+        const ano = partesData[2]
+        const dataFormatada = `${ano}-${mes}-${dia}`
+        
 
         if(!clienteId){
             res.status(422).json({message: 'O campo precisa ser preenchido.'})
@@ -58,7 +65,7 @@ module.exports = class AgendamentoController{
             return
         }
 
-        const agendamentoCheck = await Agendamento.findOne({where: {barbeiroId: barbeiroId, hora: hora, data: data}})
+        const agendamentoCheck = await Agendamento.findOne({where: {barbeiroId: barbeiroId, hora: hora, data: dataFormatada}})
         if(agendamentoCheck){
             res.status(422).json({message: 'Agendamento indisponível, tente outra data e horário.'})
             return
@@ -67,7 +74,7 @@ module.exports = class AgendamentoController{
         //CRIAR
         const create = await Agendamento.create({
             hora,
-            data,
+            data: dataFormatada,
             clienteId,
             barbeiroId,
             servicoId
