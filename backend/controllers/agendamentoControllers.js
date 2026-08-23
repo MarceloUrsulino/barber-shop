@@ -28,7 +28,7 @@ module.exports = class AgendamentoController{
             res.status(422).json({message: 'A data precisa ser válida.'})
             return
         }
-        //CONVERTENDO DATA
+        //CONVERTENDO A DATA PARA FORMATO PADRAO POIS RECEBI EM FORMATO BR
         const partesData = data.split("/")
         const dia = partesData[0]
         const mes = partesData[1]
