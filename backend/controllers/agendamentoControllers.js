@@ -2,7 +2,7 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
-const { where } = require('sequelize')
+const checkToken = require('../middleware/checkToken')
 
 module.exports = class AgendamentoController{
     static async agendamentoCreate(req,res){
@@ -87,4 +87,12 @@ module.exports = class AgendamentoController{
         const agendamentos = await Agendamento.findAll()
         res.status(200).json(agendamentos)
     }
+
+    //LISTAR AGENDAMENTOS DO BARBEIRO
+    static async agendaBarbeiro(req,res){
+        const id = req.barbeiro.id
+        const agendamentosbarbeiro = await Agendamento.findAll({where: {barbeiroId: id}})
+        res.status(200).json(agendamentosbarbeiro)
+        //console.log(agendamentosbarbeiro)
+    } 
 }
