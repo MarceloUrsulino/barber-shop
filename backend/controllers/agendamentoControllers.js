@@ -2,7 +2,8 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
-const checkToken = require('../middleware/checkToken')
+
+
 
 module.exports = class AgendamentoController{
     static async agendamentoCreate(req,res){
@@ -95,4 +96,16 @@ module.exports = class AgendamentoController{
         res.status(200).json(agendamentosbarbeiro)
         //console.log(agendamentosbarbeiro)
     } 
+    //ATUALIZAR STATUS PARA CANCELADO
+    static async updateAgendamento(req,res){
+        const id = req.params.id //PEGA O ID DA URL
+        const { status } = req.body
+        const checkAgendamento = await Agendamento.findByPk(id)
+        if(!checkAgendamento){
+            res.status(422).json({message: 'Agendamento não existe.'})
+            return
+        }
+        await Agendamento.update({status}, {where: {id:id}})
+        res.status(200).json({message: `O agendamento ${id} foi cancelado`})
+    }
 }

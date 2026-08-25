@@ -20,6 +20,7 @@ router.post('/agendamento', AgendamentoController.agendamentoCreate)
 router.get('/agendamento', AgendamentoController.agendamentoAll)
 
 router.get('/agendamento/barbeiro', checkToken, AgendamentoController.agendaBarbeiro)
+router.patch('/agendamento/status/:id', AgendamentoController.updateAgendamento)
 
 
 module.exports = router

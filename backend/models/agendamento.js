@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const db = require('../db/conn')
+const { toDefaultValue } = require('sequelize/lib/utils')
 
 
 const agendamento = db.define('Agendamento',{
@@ -21,6 +22,11 @@ const agendamento = db.define('Agendamento',{
     },
     servicoId: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    status: {
+        type: DataTypes.STRING,
+        defaultValue: 'agendado',
         allowNull: false
     }
 })
