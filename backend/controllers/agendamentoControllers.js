@@ -94,7 +94,7 @@ module.exports = class AgendamentoController{
         const id = req.barbeiro.id
         const agendamentosbarbeiro = await Agendamento.findAll({where: {barbeiroId: id}})
         res.status(200).json(agendamentosbarbeiro)
-        //console.log(agendamentosbarbeiro)
+        
     } 
     //ATUALIZAR STATUS PARA CANCELADO
     static async updateAgendamento(req,res){
