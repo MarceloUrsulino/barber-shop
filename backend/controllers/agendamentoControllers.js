@@ -100,6 +100,10 @@ module.exports = class AgendamentoController{
     static async updateAgendamento(req,res){
         const id = req.params.id //PEGA O ID DA URL
         const { status } = req.body
+        if(!status){
+            res.status(422).json({message: 'O campo precisa ser preenchido.'})
+            return
+        }
         const checkAgendamento = await Agendamento.findByPk(id)
         if(!checkAgendamento){
             res.status(422).json({message: 'Agendamento não existe.'})
