@@ -70,7 +70,7 @@ module.exports = class BarbeiroController{
     
     //LISTAR
     static async barbeiroAll(req,res){
-        const barbeiros = await Barbeiro.findAll()
+        const barbeiros = await Barbeiro.findAll({attributes: ['id','nome']})
         res.status(200).json(barbeiros)
     }
 

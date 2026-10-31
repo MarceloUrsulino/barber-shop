@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const checkToken = (req, res, next) =>{
     if(!req.headers.authorization){
-        res.status(400).json({message: 'Acesso negado.'})
+        res.status(401).json({message: 'Acesso negado.'})
         return
     }
 
@@ -14,7 +14,7 @@ const checkToken = (req, res, next) =>{
         req.barbeiro = verificar
         next()
     } catch (error) {
-        return res.status(400).json({message: 'Token inválido'})
+        return res.status(401).json({message: 'Token inválido'})
     }
 }
 
