@@ -13,7 +13,7 @@ app.use(routes)
 
 db.sync().then(()=>{
 
-    console.log('Concetou')
+    console.log('Conectou')
     app.listen(3000)
 
 }).catch(err =>{
