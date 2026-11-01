@@ -2,6 +2,7 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
+const { message } = require('statuses')
 
 
 
@@ -107,6 +108,11 @@ module.exports = class AgendamentoController{
         const checkAgendamento = await Agendamento.findByPk(id)
         if(!checkAgendamento){
             res.status(422).json({message: 'Agendamento não existe.'})
+            return
+        }
+        
+        if(req.barbeiro.id !== checkAgendamento.barbeiroId){
+            res.status(403).json({ message: 'Você não tem permissão para alterar este agendamento.'})
             return
         }
         await Agendamento.update({status}, {where: {id:id}})
