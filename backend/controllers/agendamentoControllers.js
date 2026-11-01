@@ -6,6 +6,7 @@ const Servico = require('../models/servico')
 
 module.exports = class AgendamentoController{
     static async agendamentoCreate(req,res){
+        try{
         const { hora, data, clienteId, barbeiroId, servicoId } = req.body
 
         if(!hora){
@@ -81,22 +82,44 @@ module.exports = class AgendamentoController{
         })
         res.status(201).json({message: 'Agendamento criado.'})
         return
+
+        } catch (error) {
+        console.log(error)
+        res.status(500).json({message: 'Erro ao criar agendamento.'})
+        }
     }
+
     //LISTAR
     static async agendamentoAll(req,res){
+
+    try{
         const agendamentos = await Agendamento.findAll()
         res.status(200).json(agendamentos)
+
+    } catch(error){
+        console.log(error)
+        res.status(500).json({message: "Erro ao tentar listar."})
     }
+    }
+    
 
     //LISTAR AGENDAMENTOS DO BARBEIRO
     static async agendaBarbeiro(req,res){
+
+    try{
         const id = req.barbeiro.id
         const agendamentosbarbeiro = await Agendamento.findAll({where: {barbeiroId: id}})
         res.status(200).json(agendamentosbarbeiro)
         
-    } 
+    } catch(error){
+        console.log(error)
+        res.status(500).json({message: "Erro ao tentar listar."})
+    }
+}
     //ATUALIZAR STATUS PARA CANCELADO
     static async updateAgendamento(req,res){
+
+    try{
         const id = req.params.id //PEGA O ID DA URL
         const { status } = req.body
         if(!status){
@@ -123,5 +146,10 @@ module.exports = class AgendamentoController{
         }
         await Agendamento.update({status}, {where: {id:id}})
         res.status(200).json({message: `O status do agendamento ${id} foi atualizado para ${status}`})
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({message: "Erro ao tentar atualizar."})
+    }  
     }
 }
