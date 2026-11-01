@@ -2,7 +2,7 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
-const agendamento = require('../models/agendamento')
+
 
 
 
@@ -68,7 +68,7 @@ module.exports = class AgendamentoController{
             return
         }
 
-        const agendamentoCheck = await Agendamento.findOne({where: {barbeiroId: barbeiroId, hora: hora, data: dataFormatada}})
+        const agendamentoCheck = await Agendamento.findOne({where: {barbeiroId: barbeiroId, hora: hora, data: dataFormatada, status: 'agendado'}})
         if(agendamentoCheck){
             res.status(422).json({message: 'Agendamento indisponível, tente outra data e horário.'})
             return
@@ -125,6 +125,6 @@ module.exports = class AgendamentoController{
             return
         }
         await Agendamento.update({status}, {where: {id:id}})
-        res.status(200).json({message: `O agendamento ${id} foi cancelado`})
+        res.status(200).json({message: `O status do agendamento ${id} foi atualizado para ${status}`})
     }
 }
