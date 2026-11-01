@@ -62,7 +62,7 @@ module.exports = class BarbeiroController{
         const token = jwt.sign({
             nome: barberExiste.nome,
             id: barberExiste.id
-        }, process.env.JWT_SECRET)
+        }, process.env.JWT_SECRET, { expiresIn: '2h' })
         
         res.status(200).json({message: 'Você está conectado', token: token, barbeiroId: barberExiste.id,})
 
