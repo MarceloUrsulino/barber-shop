@@ -4,9 +4,6 @@ const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
 
 
-
-
-
 module.exports = class AgendamentoController{
     static async agendamentoCreate(req,res){
         const { hora, data, clienteId, barbeiroId, servicoId } = req.body
