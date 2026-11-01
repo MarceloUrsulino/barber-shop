@@ -2,7 +2,8 @@ const Agendamento = require('../models/agendamento')
 const Cliente = require('../models/cliente')
 const Barbeiro = require('../models/barbeiro')
 const Servico = require('../models/servico')
-const { message } = require('statuses')
+const agendamento = require('../models/agendamento')
+
 
 
 
@@ -105,6 +106,14 @@ module.exports = class AgendamentoController{
             res.status(422).json({message: 'O campo precisa ser preenchido.'})
             return
         }
+        
+        const statusPermitidos = ['agendado', 'cancelado']
+
+        if(!statusPermitidos.includes(status)){
+            res.status(422).json({message: 'Status inválido.'})
+            return
+        }
+
         const checkAgendamento = await Agendamento.findByPk(id)
         if(!checkAgendamento){
             res.status(422).json({message: 'Agendamento não existe.'})
