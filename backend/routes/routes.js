@@ -11,16 +11,16 @@ router.post('/login', BarbeiroController.login)
 router.get('/barbeiro', BarbeiroController.barbeiroAll)
 
 router.post('/cliente', ClienteController.clienteCreate)
-router.get('/cliente', ClienteController.clienteAll)
+router.get('/cliente', checkToken, ClienteController.clienteAll)
 
-router.post('/servico', ServicoController.servicoCreate)
+router.post('/servico', checkToken, ServicoController.servicoCreate)
 router.get('/servico', ServicoController.servicoAll)
 
 router.post('/agendamento', AgendamentoController.agendamentoCreate)
-router.get('/agendamento', AgendamentoController.agendamentoAll)
+router.get('/agendamento', checkToken, AgendamentoController.agendamentoAll)
 
 router.get('/agendamento/barbeiro', checkToken, AgendamentoController.agendaBarbeiro)
-router.patch('/agendamento/status/:id', AgendamentoController.updateAgendamento)
+router.patch('/agendamento/status/:id', checkToken, AgendamentoController.updateAgendamento)
 
 
 module.exports = router
