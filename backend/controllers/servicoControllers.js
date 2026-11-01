@@ -2,10 +2,12 @@ const Servico = require('../models/servico')
 
 module.exports = class ServicoController{
     static async servicoCreate(req,res){
+
+    try{
         const { nome, preco } =  req.body
 
         if(!nome){
-            res.status(422).json({message: 'O campo precisa ser preechido.'})
+            res.status(422).json({message: 'O campo precisa ser preenchido.'})
             return
         }
         //VALIDANDO SE É UM NÚMERO VÁLIDO
@@ -32,13 +34,25 @@ module.exports = class ServicoController{
             preco 
         })
         res.status(201).json({message: 'Serviço adicionado.'})
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({message: "Erro ao tentar criar o serviço"})
     }
+}
 
     //LISTAR
     static async servicoAll(req,res){
+
+    try{
         const servicos = await Servico.findAll()
         res.status(200).json(servicos)
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({message: "Erro ao tentar listar os serviços."})
     }
 
+}
 }
 
