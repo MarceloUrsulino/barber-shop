@@ -23,7 +23,7 @@ module.exports = class ClienteController{
             nome,
             numero
         })
-        res.status(201).json({message: 'Cliente adicionado.'})
+        res.status(201).json({message: 'Cliente adicionado.', clienteId: create.id})
 
     }catch(error){
         console.log(error)
