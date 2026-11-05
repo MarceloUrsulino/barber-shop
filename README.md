@@ -147,7 +147,7 @@ URL base: `http://localhost:3000`
 | `POST` | `/servico` | Cadastra um serviço | Obrigatória |
 | `GET` | `/servico` | Lista os serviços | — |
 | `POST` | `/agendamento` | Cria um agendamento | — |
-| `GET` | `/agendamento` | Lista todos os agendamentos | Obrigatória |
+| `GET` | `/agendamento` | Lista todos os agendamentos (qualquer barbeiro autenticado) | Obrigatória |
 | `GET` | `/agendamento/barbeiro` | Lista os agendamentos do barbeiro autenticado | Obrigatória |
 | `PATCH` | `/agendamento/status/{id}` | Atualiza o status de um agendamento | Obrigatória |
 
